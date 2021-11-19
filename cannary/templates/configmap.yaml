@@ -1,0 +1,23 @@
+# This is a simple example of using a config map to create a single page static site.
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test
+  labels:
+    release: {{ .Release.Name }}
+    app: test
+data:
+  index.html: {{ .Values.index | quote }}
+  test.txt: blue
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-green
+  labels:
+    release: {{ .Release.Name }}
+    app: test
+data:
+  index.html: {{ .Values.index | quote }}
+  test.txt: green

@@ -1,0 +1,40 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  labels:
+    app: prod 
+    release: {{ .Release.Name }}
+spec:
+  rules:
+  - host: {{ .Values.ingress.hostname }}
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: service-prod
+            servicePort: http
+---
+{{ if .Values.canary.enabled }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cannary-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-weight: "10"
+    nginx.ingress.kubernetes.io/canary-by-header: "cannary"
+    nginx.ingress.kubernetes.io/canary-by-header-pattern: "on"
+  labels:
+    app: prod 
+    release: {{ .Release.Name }}
+spec:
+  rules:
+  - host: {{ .Values.ingress.hostname }}
+    http:
+      paths:
+        - path: /
+          backend:
+            serviceName: service-stage
+            servicePort: http
+{{ end }}

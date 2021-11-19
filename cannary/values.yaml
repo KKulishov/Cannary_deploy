@@ -1,0 +1,24 @@
+green:
+  enabled: false
+  image: nginx
+  tag: stable
+
+blue:
+  enabled: false
+  image: nginx
+  tag: stable 
+
+canary:
+  enabled: false  
+
+productionSlot: blue
+
+replicaCount: 1
+
+ingress:
+  hostname: prod.172.16.10.97.nip.io
+
+index: hello world
+
+
+  
