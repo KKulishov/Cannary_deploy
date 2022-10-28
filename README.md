@@ -9,7 +9,7 @@ ingress:
 деплоим, основной траффик идет на сервис с меткой blue
 
 ```
-helm upgrade --install test  --set blue.enabled=true ./cannary
+helm upgrade --install test  --set blue.enabled=true --set blue.tag=blue.1  ./cannary
 ```
 ### Важный элемент в этой схеме  productionSlot, он и будет указателем куда направлять траффик основной
 
@@ -20,17 +20,17 @@ helm upgrade --install test  --set blue.enabled=true ./cannary
 ```
 
 
-### Включаем green еще один деплой и подключаем к нему канареечный через ingress nginx
+### Включаем green еще один деплой и подключаем к нему канареечный через ingress nginx (в $currentSlot нужно указать планируемый деплой)
 
 ```
-helm upgrade --install test --set productionSlot=$currentSlot --set blue.enabled=true --set green.enabled=true --set canary.enabled=true ./cannary
+helm upgrade --install test --set productionSlot=$currentSlot --set blue.enabled=true --set green.tag=green.1  --set green.enabled=true --set canary.enabled=true ./cannary
 ```
 
 
 ### проверка канарейки 
 
 ```
-curl -H "cannary: on" http://prod.172.16.10.97.nip.io/test.txt
+curl -H "cannary: on" http://prod.172.16.10.97.nip.io
 ```
 
 ### переключение на blue и green 
@@ -60,3 +60,5 @@ helm upgrade --install test --set productionSlot=blue --set blue.enabled=true --
 ```
 helm uninstall test
 ```
+
+### Доп. закрытое описание [Blue/Green Deployments projects](https://docs.google.com/document/d/1qKYdUgU6tcPGIqcHpgoIxHUQZs8UwZceINIjL-WpSng/edit?usp=sharing)

@@ -1,0 +1,10 @@
+version: "3.6"
+services:
+  nginx:
+    build:
+      context: $PWD
+      dockerfile: $PWD/.docker/nginx/Dockerfile
+      args:
+        - UID
+        - GID
+    image: ${NGINX}:${CI_COMMIT_REF_SLUG}.${CI_PIPELINE_ID}  

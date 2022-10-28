@@ -28,12 +28,12 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          # This (and the volumes section below) mount the config map as a volume.
-          volumeMounts:
-            - mountPath: /usr/share/nginx/html
-              name: wwwdata-volume
-      volumes:
-        - name: wwwdata-volume
-          configMap:
-            name: test-green
+      #    # This (and the volumes section below) mount the config map as a volume.
+      #    volumeMounts:
+      #      - mountPath: /usr/share/nginx/html
+      #        name: wwwdata-volume
+      #volumes:
+      #  - name: wwwdata-volume
+      #    configMap:
+      #      name: test-green
 {{ end }}

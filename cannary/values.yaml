@@ -1,12 +1,12 @@
 green:
   enabled: false
-  image: nginx
-  tag: stable
+  image: ghcr.io/kkulishov/cannary_deploy/nginx
+  tag: green.1
 
 blue:
   enabled: false
-  image: nginx
-  tag: stable 
+  image: ghcr.io/kkulishov/cannary_deploy/nginx
+  tag: blue.1 
 
 canary:
   enabled: false  
@@ -16,7 +16,7 @@ productionSlot: blue
 replicaCount: 1
 
 ingress:
-  hostname: prod.172.16.10.97.nip.io
+  hostname: prod.172.16.10.160.nip.io
 
 index: hello world
 
