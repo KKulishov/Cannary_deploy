@@ -12,3 +12,9 @@ jobs:
         run: |
           cp .env_example.env .env
           docker-compose build nginx
+
+      - name: Push build 
+        run: |
+          cp .env_example.env .env
+          docker login -u ${{ secrets.GIHUB_USERNAME }} -p "${{ secrets.GIHUB_PASSWORD }}"
+          docker-compose push 
