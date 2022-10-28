@@ -4,6 +4,8 @@ name: build nginx
 # ручной запуск
 on: [workflow_dispatch]
 
+# https://docs.github.com/en/actions/learn-github-actions/environment-variables
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,7 +19,7 @@ jobs:
       - name: Push build 
         run: |
           cp .env_example.env .env
-          docker login -u ${{ secrets.GIHUB_USERNAME }} -p "${{ secrets.GIHUB_PASSWORD }}"
+          docker login docker.pkg.github.com -u ${{ secrets.GIHUB_USERNAME }} -p "${{ secrets.GIHUB_PASSWORD }}"
           docker-compose push 
 
   deploy:
