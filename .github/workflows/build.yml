@@ -1,6 +1,7 @@
 
 name: build nginx
 
+# ручной запуск
 on: [workflow_dispatch]
 
 jobs:
@@ -18,3 +19,13 @@ jobs:
           cp .env_example.env .env
           docker login -u ${{ secrets.GIHUB_USERNAME }} -p "${{ secrets.GIHUB_PASSWORD }}"
           docker-compose push 
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    name: Run remote deploy script
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy 
+        run: echo 'deploy'        
