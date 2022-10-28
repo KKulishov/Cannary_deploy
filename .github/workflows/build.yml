@@ -9,5 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the stack
-        run: ls -la 
-
+        run: |
+          cp .env_example.env .env
+          docker-compose build nginx
