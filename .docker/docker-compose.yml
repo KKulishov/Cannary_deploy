@@ -7,4 +7,4 @@ services:
       args:
         - UID
         - GID
-    image: ${NGINX}:${CI_COMMIT_REF_SLUG}.${CI_PIPELINE_ID}  
+    image: ${NGINX}:${CI_COMMIT_REF_SLUG}.${github.sha}  
